@@ -1,0 +1,4 @@
+column	datatype	size	label	display	read	write	search	validate
+gid	key#	0	GID	no	5	9	no	hard
+section_id	key:content	0	Section	brief	5	8	yes	yes
+name	string	80	Group Name	key	5	8	yes	soft

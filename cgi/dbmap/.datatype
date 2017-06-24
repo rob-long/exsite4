@@ -1,0 +1,63 @@
+type	tag	regexp	validate
+text	text	(.|\n)+
+string	text	.+
+var	text	[\w\.-]+
+date	text	[0-9]{1,4}-[0-9]{1,2}-[0-9]{1,2} ?	Please enter dates as YYYY-MM-DD
+time	text	[012]?[0-9]:[0-5][0-9](:[0-5][0-9])?	Please enter times in 24-hour format, with optional seconds, eg. 23:59:00
+datetime	text	[0-9]{1,4}-[0-9]{1,2}-[0-9]{1,2} [012]?[0-9]:[0-5][0-9]:[0-5][0-9]	Please enter dates as YYYY-MM-DD hh:mm:ss
+timestamp	text	[0-9]{1,4}-[0-9]{1,2}-[0-9]{1,2} [012]?[0-9]:[0-5][0-9]:[0-5][0-9]	Please enter dates as YYYY-MM-DD hh:mm:ss
+email	text	[\w](\.?[\w\-\+]+)*@([\w\-]+\.)+[A-Za-z]{2,4}	Emails should be formatted like name@mailhost.com
+url	text	(((http://)?.+\..+)|(mailto:[\w](\.?[\w\-]+)*@([\w\-]+\.)+[A-Za-z]{2,4}))
+key	text	[0-9]+	Enter a numeric record ID.
+key#	text	[0-9]+	Enter a numeric record ID.
+int	text	-?[0-9]+	Enter an integer value.
+float	text	-?[0-9]*(\.[0-9]+)?	Enter a numeric value with optional decimal point values.
+decimal	text	-?[0-9]*(\.[0-9]+)?	Enter a numeric value with optional decimal point values.
+percent	text	-?[0-9]*(\.[0-9]{2})?	Enter a numeric value, optionally with up to two decimal point values.
+money	text	-?[0-9]*(\.[0-9]{2})?	Enter an amount, optionally with two decimal point values.
+password	password	.{4,}	Password is too short
+file	file	.+
+bigfile	file	.+
+filepath	text	(/[\w\-\.]+)+	Please enter the full path to a file on the webserver.
+variable_name	text	[a-zA-Z]\w+	Please enter a word starting with a letter, and containing only letters, numbers, or underscores.
+list:undefined	select	WARNING: undefined list!
+list:yn	radio	Y|N
+list:privacy	radio	public|members only
+list:language	select	Français
+#list:language	select	Français|中文|русский
+list:status	select	active|inactive
+#
+# CMS datatypes:
+#
+set:hide	checkbox	menu|sitemap|indexes|search|robots
+#enum:access	select	0:public|1:members|2:editors|3:sysadmins
+enum:access	select	0:public|1:users|2:members|5:any executive-level|7:managers|8:sysadmins
+list:access	select	public|members|editors|sysadmins
+list:publish	select	static|dynamic|hourly|daily|weekly|never
+list:subpublish	select	all|page|item|other|none
+list:superpublish	select	parent|ancestor|all|none
+list:navtype	select	page|item|none
+list:disptype	select	raw|formatted|template|none
+list:revtype	select	content|content-index|index-content|formatted|template
+list:cnode_type	select	section|page|template|library|content|article|event
+list:cnode_status	select	active|inactive|archived|pending|rejected
+list:view_type	select	normal|large|small|thumbnail|icon
+list:view_format	select	text|file|url|path
+list:role	select	editor|designer|reviewer|administrator
+set:role	select	editor|designer|reviewer|administrator|owner
+list:cnodetype_publish	select	file|directory|n/a
+list:content_type	select	section|page|template|library|content|article|event
+list:content_status	select	active|disabled|archived|pending|rejected|queued
+enum:content_status	select	0:published|1:archived|2:queued|3:approved|4:submitted|5:draft|6:expired|7:canceled|8:rejected
+enum:revision_status	select	0:active|4:draft
+list:content_role	select	editorial|design|user
+list:key_type	select	grant|revoke
+list:content_type_publish	select	file|directory|never
+#olist:date_type	select	publish|queue|archive|deactivate
+olist:event_type	select	publish|queue|index|archive|remove
+list:date_type	select	task|todo|calendar|log|other
+list:date_status	select	active|hourly|daily|weekly|completed|inactive
+list:price_status	select	active|inactive
+list:mime	select	text/plain|text/html|text/css|text/tab-separated-values|image/gif|image/jpeg|image/png|video/mpeg|video/quicktime|video/x-msvideo|video/x-ms-wmv|video/x-pn-realvideo|audio/basic|audio/x-aiff|audio/x-wav|application/pdf|application/postscript|application/msword|application/vnd.ms-excel|application/powerpoint|application/x-shockwave-flash|application/x-tar|application/x-dvi|application/x-latex|application/xml|application/x-gzip|application/zip|application/octet-stream|application/vnd.openxmlformats-officedocument.presentationml.presentation|application/vnd.openxmlformats-officedocument.wordprocessingml.document|application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|application/x-javascript
+list:album_viewer	select	default|bsthumb|bscarousel
+list:shopping_cart	select	none|standard|quick|custom

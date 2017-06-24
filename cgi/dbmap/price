@@ -1,0 +1,12 @@
+column	datatype	size	label	display	read	write	validate	default
+price_id	key#	0	Price ID	full	5	9	hard
+content_id	key:content	0	Item	brief	5	6	soft
+status	list:price_status	10	Status	brief	5	6	soft	active
+description	string	80	Description	key	5	6	no	Price
+#currency	list:currency	10	Currency	brief	5	6	yes
+cost	money	0	Cost	brief	5	5	soft
+acctcode_id	key=acctcode	0	Sales Type	brief	5	6	yes
+access	enum:access	0	Access	brief	5	6	yes	0
+start	datetime:picker	0	Valid from	brief	5	6	yes
+end	datetime:picker	0	Valid to	brief	5	6	yes
+ctime	timestamp	0	Created	full	5	9	no	no

@@ -1,0 +1,15 @@
+column	datatype	size	label	display	read	write	validate
+content_type_id	key#	0	Content Type ID	full	5	9	hard
+name	string	40	Name	key	5	8	soft
+class	string	40	Class	brief	5	8	no
+plugin	string	40	Plugin	brief	5	8	no
+role	list:content_role	40	Role	full	5	8	yes
+publish_as	list:cnodetype_publish	20	Publish As	brief	5	8	soft
+publish	list:publish	20	Publish Method	full	5	8	yes
+subpublish	list:subpublish	20	Publish Descendants	brief	5	8	yes
+#superpublish	list:superpublish	20	Publish Ancestors	brief	5	8	yes
+navtype	list:navtype	20	Navigation Type	brief	5	8	yes
+displaytype	list:disptype	20	Display Type	brief	5	8	yes
+revtype	list:revtype	20	Revision Handling	brief	5	8	yes
+# can't unset hide items
+#hide	set:hide	255	Hide From	full	5	8	yes

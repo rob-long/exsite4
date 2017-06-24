@@ -1,0 +1,42 @@
+column	datatype	size	label	display	read	write	validate
+# content node
+#
+# ID
+#
+content_id	key#	0	Node ID	full	5	9	hard
+type	key:content_type	20	Type	brief	5	5	soft
+#
+# text IDs
+#
+title	string	255	Title (how it appears in headings)	full	1	5	no
+name	string	80	Name (how it appears in URLs)	full	1	5	no
+label	string	80	Label (how it appears in menus and indexes)	key	1	5	no
+url	url	255	URL	full	1	5	yes
+#
+# relations
+#
+parent	key:content	0	Parent	full	5	5	yes
+template	key=content	0	Template	full	5	5	yes
+master	key=content	0	Original	full	5	5	yes
+language	list:language	80	Language	brief	5	5	yes
+sortkey	string	80	Sort Key	full	5	5	yes
+#
+# access
+#
+access	enum:access	40	Access	brief	5	5	yes
+hide	set:hide	255	Hide From	full	5	5	yes
+content_role	list:content_role	20	Content Role	full	5	5	yes
+#
+# publication
+#
+publish	list:publish	40	Publish Rule	full	5	5	yes
+#
+# status
+#
+status	enum:content_status	20	Status	full	5	7	soft
+#
+# timestamps
+#
+mtime	timestamp	0	Last Modified	full	5	9	no
+ctime	timestamp	0	Created	full	5	9	no	no
+ptime	timestamp	0	Originally Published	full	5	9	no	no

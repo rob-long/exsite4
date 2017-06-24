@@ -1,0 +1,4 @@
+column	datatype	size	label	display	read	write	validate	default
+content_flag_id	key#	0	Flag ID	full	5	9	hard
+content_id	key:content	0	Content	brief	5	8	soft
+flag	string	255	Flag	key	5	8	soft

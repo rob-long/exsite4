@@ -1,0 +1,7 @@
+column	datatype	size	label	display	read	write	validate	default
+content_like_id	key#	0	Like ID	full	5	9	hard
+content_id	key:content	0	Content	brief	5	8	soft
+uid	key:member	0	User	brief	5	8	soft
+account	key:account	0	Account	brief	5	8	soft
+value	int	0	Value	brief	5	8	soft
+ctime	timestamp	0	Time	full	5	8	yes

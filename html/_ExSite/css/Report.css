@@ -1,0 +1,206 @@
+/* Standard ExSite report style */
+
+/* alternating row styles */
+
+tr.A	{ background:white; }
+tr.B	{ background:#f0f0f7; }
+
+/* tabular reports */
+
+table.Report { 
+        border:2px #999 solid; 
+        border-collapse:collapse; 
+	margin-bottom:10pt;
+	min-width:200px;
+}
+table.Report td { 
+        margin:0px; 
+        padding:5px;
+        border-right:1px #999 solid;
+        border-top:0px;
+        border-left:0px;
+        border-bottom:0px;
+}
+table.Report td.rdata { 
+	background-color:white;
+	text-align:left;
+	font-family:sans-serif;
+}
+table.Report th { 
+        border:1px #999 solid; 
+	color:black;
+        background-color:#e4e4e4; /* #266aa7; */
+        margin:0px; 
+        padding:5px 10px; 
+	font-weight:normal;
+}
+table.Report th.rlabel { 
+        border:1px #2c435b dotted; 
+        border-right:1px #999 solid; 
+	background:#e4e4e4; /* 97b9dc; */
+        margin:0px; 
+        padding:5px; 
+	font-weight:bold; 
+	font-size:12px; 
+	text-align:left;
+}
+table.Report th.ReportTools {
+	text-align:right;
+	background-color: #e4e4e4; /*#afc6e0; #79a9d3; 97b9dc;*/
+	border-bottom:2px solid #999;
+	padding:5px 3px 5px 3px;
+}
+table.Report th.ReportTitle {
+	background-color:#266aa7;
+	color:#ffffff;
+}
+table.Report caption {
+	color:#666;;
+        padding:0px; 
+	font-weight:bold; 
+	font-size:150%; 
+	font-style:italic;
+	text-align:left;
+}
+table.Report td.ReportFooter {
+	padding:10px;
+	background-color:white;
+}
+table.Report tfoot { 
+        border-top:1px #bbb solid; 
+}
+tfoot tr.B { 
+	/* turn off row highlighting in footer */
+/*	background:white;  */
+}
+.num {
+	text-align:right;
+}
+.debit {
+	color:red;
+}
+.total {
+	font-weight:bold;
+}
+.nodata {
+    display:block;
+    width:300px;
+}
+
+/* compact reports for large data volumes */
+
+table.Report.compact { 
+        border:none;
+	margin-bottom:10pt;
+	min-width:200px;
+}
+table.Report.compact td { 
+        padding:3px;
+	font-size:x-small;
+	border:none;
+}
+table.Report.compact th { 
+        border:none;
+        margin:0px; 
+        padding:3px 15px; 
+	font-size:x-small; 
+}
+table.Report.compact th.rlabel { 
+        border:none;
+        padding:3px; 
+	font-weight:normal; 
+	font-size:x-small; 
+}
+table.Report.compact th.ReportTools {
+	border: none;
+	padding:3px;
+}
+table.Report.compact caption {
+	font-size:120%; 
+}
+table.Report.compact td.ReportFooter {
+	padding:5px;
+	background-color:white;
+}
+table.Report.compact tfoot { 
+        border:none;
+}
+
+/* dataTables */
+
+.dataTables_filter {
+    font-size:80%;
+    float:right;
+    position:relative;
+    z-index:10;
+    /* top:35px; */
+}
+.dataTables_length {
+    font-size:80%;
+    float:right;
+    padding-left:20px;
+    position:relative;
+    z-index:10;
+    /* top:35px; */
+}
+table.dataTable {
+    margin-bottom:0px;
+    width:100%;
+    position:relative;
+    top:-20px;
+}
+.dataTables_paginate {
+    font-size:80%;
+    float:right;
+    padding:8px;
+    position:relative;
+    top:-20px;
+}
+.dataTables_paginate a {
+    color: #337ab7;
+    cursor: pointer;
+    border:1px solid #999;
+    margin:2px;
+    padding:2px 3px 1px 4px;
+    font-weight: normal;
+    font-size:x-small;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    text-decoration:none;
+}
+.dataTables_paginate a:hover {
+    background:#ddd;
+    text-decoration:none;
+}
+.dataTables_info {
+margin-top:0px;
+    float:right;
+    color:white;
+    background-color:#337ab7;
+    padding:5px; 
+    font-weight:bold; 
+    font-size:12px; 
+    padding-left:10px;
+    width:250px;
+    text-align:center;
+    border-bottom-left-radius:5px;    
+    border-bottom-right-radius:5px;    
+    -webkit-border-bottom-left-radius:5px;    
+    -webkit-border-bottom-right-radius:5px;    
+    -moz-border-radius-bottomleft:5px;    
+    -moz-border-radius-bottomright:5px;    
+    position:relative;
+    top:-20px;
+}
+table.dataTable thead th {
+    cursor: pointer;
+    *cursor: hand;
+}
+table.dataTable thead th:hover {
+    background-color:#ccc;
+}
+
+tr.odd		{ background:white; }
+tr.even		{ background:#f0f0f7; }
+

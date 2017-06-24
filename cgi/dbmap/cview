@@ -1,0 +1,16 @@
+column	datatype	size	label	display	read	write	validate
+#
+# revision ID
+#
+cview_id	key#	0	View ID	key	2	4	hard
+revision_id	key:revision	0	Revision	brief	2	2	soft
+type	list:view_type	20	View	brief	2	2	soft
+#
+# revision data
+#
+mime_type	list:mime	80	Mime-Type	brief	2	2	soft
+### do we need size?
+#size	int	0	Size	brief	2	2	soft
+format	list:view_format	20	Format	brief	2	2	soft
+data	mediumtext	1000	Data	full	2	2	soft
+attributes	string	255	Attributes	full	2	2	no

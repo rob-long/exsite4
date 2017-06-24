@@ -1,0 +1,7 @@
+column	datatype	size	label	display	read	write	validate
+# trash
+trash_id	key#	0	Trash ID	no	2	4	hard
+ctime	timestamp	10	Date	brief	2	4	no
+description	string	80	Description	key	2	3	no
+uid	key=user	0	Owner	brief	2	3	yes
+data	mediumtext	1000	Trash Data	full	3	3	no

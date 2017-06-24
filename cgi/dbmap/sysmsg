@@ -1,0 +1,5 @@
+column	datatype	size	label	display	read	write	validate
+# trash
+sysmsg_id	key#	0	System Message ID	no	2	4	hard
+ctime	timestamp	10	Updated	brief	2	4	no
+message	text	200	Message	key	2	3	no

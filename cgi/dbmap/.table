@@ -1,0 +1,25 @@
+table	alias	key	title	plural	read	insert	update	delete	search	index	class
+user	user	uid	User	Users	5	7	1	7	5		ExSite::User
+usergroup	usergroup	gid	Group	Groups	5	7	1	7	5		ExSite::Group
+groupkey	groupkey	groupkey_id	Group Membership	Group Membership	5	7	1	7	5	
+service	service	service_id	Service	Services	7	7	7	7	7	section_id
+trash	trash	trash_id	Trash	Trash	7	8	8	7	7
+attribute	attribute	attribute_id	Attribute	Attributes	1	1	1	1	9
+token	token	name	Token	Tokens	8	8	8	8	8
+content	content	content_id	Content	Content	8	7	7	7	8	name	ExSite::Content
+section	content	content_id	Section	Section	8	7	7	7	8	name	ExSite::Section
+revision	revision	revision_id	Revision	Revisions	8	7	7	7	8	content_id	ExSite::Revision
+cview	cview	cview_id	View	Views	8	7	7	7	8	revision_id	ExSite::View
+metadata	metadata	metadata_id	Metadata	Metadata	8	7	7	7	8	metadata_id,id,name
+content_flag	content_flag	content_flag_id	Flag	Flags	8	7	7	7	8	content_id
+content_key	content_key	content_key_id	Content Key	Content Keys	8	7	7	7	8	content_id,uid
+content_type	content_type	content_type_id	Content Type	Content Types	8	7	7	7	8
+content_rel	content_rel	content_rel_id	Content Relation	Content Relations	8	7	7	7	8	type
+content_like	content_like	content_like_id	Like	Likes	8	7	7	7	8	content_id;uid
+content_date	content_date	content_date_id	Date	Dates	8	7	7	7	8	content_id	ExSite::Date
+#event	event	event_id	Event	Events	8	7	7	7	8	content_id
+price	price	price_id	Price	Prices	8	7	7	7	8	content_id
+searchurl	searchurl	searchurl_id	Searchable Page	Searchable Pages	8	8	8	8	8	section_id;content_id
+searchterm	searchterm	searchterm_id	Search Term	Search Terms	8	8	8	8	8	term;searchurl_id
+sysmsg	sysmsg	sysmsg_id	Message	Messages	5	7	7	7	7
+sysmsg_alt	sysmsg_alt	sysmsg_alt_id	Alternate Message	Alternate Messages	5	7	7	7	7

@@ -1,0 +1,21 @@
+column	datatype	size	label	display	read	write	validate
+# content node metadata
+#
+# ID
+#
+metadata_id	key#	0	Metadata ID	full	5	9	hard
+#type	key:content_type	20	Use on	brief	1	2	yes
+#
+# text IDs
+#
+name	string	255	Name	key	5	5	soft
+value	text	255	Value	brief	5	5	soft
+#
+# relations
+#
+id	key:content	0	Content	full	5	5	yes
+#
+# timestamps
+#
+mtime	timestamp	0	Last Modified	full	5	9	no
+ctime	timestamp	0	Created	full	5	9	no

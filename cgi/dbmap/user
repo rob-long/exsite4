@@ -1,0 +1,11 @@
+column	datatype	size	label	display	read	write	search	validate
+uid	key#	0	UID	no	1	9	no	hard
+login	string	80	Login	brief	1	7	general	soft
+password	password	80	Password	no	8	7	no	soft
+name	string	80	Full Name	key	5	7	yes	yes
+email	email	80	E-mail	brief	7	7	yes	yes
+access	int	0	Access Level	full	5	7	yes	soft
+section_id	key:section	0	Home Site	brief	5	7	yes	yes
+# optional:
+#login_count	int	0	Number of Logins	full	3	4	no	yes
+#last_login	timestamp	0	Last Login	full	3	4	no	yes

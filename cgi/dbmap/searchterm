@@ -1,0 +1,5 @@
+column	datatype	size	label	display	read	write	validate
+searchterm_id	key#	0	Search Term ID	no	8	9	hard
+term	string	80	Term	key	7	7	no
+searchurl_id	key:searchurl	0	URL	brief	7	8	no
+weight	int	0	Weight	brief	7	7	no

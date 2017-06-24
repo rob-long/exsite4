@@ -1,0 +1,186 @@
+#!/usr/bin/perl
+
+# ExSite cgi testing script
+#
+# Usage: cgi [-d] [-p][ -c COOKIE] [-e ENV_VAR] URL
+#
+# The URL should be a full HTTP url, from which the scripts will
+# autoconfigure ExSite.
+
+use strict;
+
+# load up the script parameters
+
+if ($#ARGV < 0) { &help; exit; }
+
+use vars qw($debug $profile $url);
+while ($_ = shift @ARGV) {
+    if (/^-d$/) { 
+	# turn debug mode on
+	$debug = 1; 
+    }
+    elsif (/^-p$/) { 
+	# turn profiling on
+	$profile = 1; 
+    }
+    elsif (/^-c$/) { 
+	# set cookie
+	my $cookie = shift;
+	if ($ENV{HTTP_COOKIE}) {
+	    $ENV{HTTP_COOKIE} = "$ENV{HTTP_COOKIE}; $cookie";
+	}
+	else {
+	    $ENV{HTTP_COOKIE} = $cookie;
+	}
+    }
+    elsif (/^-e$/) { 
+	# set environment variable
+	my ($var,$val) = split /=/,shift,2;
+	$ENV{$var} = $val;
+    }
+    else {
+	$url = $_;
+    }
+}
+
+# parse the URL
+
+$url =~ /^(([^:\/?\#]+):)?(\/\/([^\/?\#]*))?([^?\#]*)(\?([^\#]*))?(\#(.*))?/;
+
+my %urldata = (
+	       scheme    => $2,
+	       authority => $4,
+	       path      => $5,
+	       query     => $7,
+	       fragment  => $9,
+	       );
+my $hostname = $urldata{authority};
+my $querystring = $urldata{query};
+$urldata{path} =~ /\/cgi(-bin)?(\/.+?)?\/([\w-]+\.(cgi|pl))((\/.+?)*)?$/;
+my $cgisub = $2;
+my $scriptname = $3;
+my $pathinfo = $5;
+
+# figure out what our identity cookie name is by scanning the conf file
+
+my $cookie_name;
+open F, "<exsite.conf" or open F, "<conf/exsite.conf";
+while (<F>) {
+    if (/site\.identity_cookie/) {
+	chomp;
+	(undef,$cookie_name) = split /=\s*/;
+	last;
+    }
+}
+close F;
+if (! $cookie_name) { $cookie_name = "ExSiteID"; }
+
+# log in to get permissions
+
+print "Login: ";
+my $login = <STDIN>;
+chomp $login;
+if ($login) {
+    print "Password: ";
+    my $pwd = <STDIN>;
+    chomp $pwd;
+    my $cookie = "$cookie_name=".join(":",$login,crypt($pwd,"wd"));
+    print "Set-cookie: $cookie\n";
+    if ($ENV{HTTP_COOKIE}) {
+	$ENV{HTTP_COOKIE} = "$ENV{HTTP_COOKIE}; $cookie";
+    }
+    else {
+	$ENV{HTTP_COOKIE} = $cookie;
+    }
+}
+
+# spoof server environment
+
+my $myname = $ENV{LOGNAME};
+my $cwd = `pwd`;
+chomp $cwd;
+my @cwd = split(/\//,$cwd);
+my $project = $cwd[-2];
+if (! defined $ENV{DOCUMENT_ROOT}) {
+    my $docroot = $cwd;
+    $docroot =~ s/cgi(-bin)?/html/;
+    $ENV{DOCUMENT_ROOT} = $docroot;
+}
+if (! defined $ENV{SCRIPT_NAME}) {
+    $ENV{SCRIPT_NAME} = "/cgi$cgisub/$scriptname";
+}
+if (! defined $ENV{SCRIPT_FILENAME}) {
+    $ENV{SCRIPT_FILENAME} = "$cwd/$scriptname";
+}
+if (! defined $ENV{HTTP_HOST}) {
+    $ENV{HTTP_HOST} = $hostname;
+}
+if (! defined $ENV{QUERY_STRING}) {
+    $ENV{QUERY_STRING} = $querystring;
+}
+if (! defined $ENV{PATH_INFO}) {
+    $ENV{PATH_INFO} = $pathinfo;
+}
+if (! defined $ENV{SERVER_NAME}) {
+    $ENV{SERVER_NAME} = $hostname;
+}
+if (! defined $ENV{REQUEST_URI}) {
+    $ENV{REQUEST_URI} = $ENV{SCRIPT_NAME}."?$querystring";
+}
+# special debug flag so exsite knows it is running in the debugger
+$ENV{EXSITE_DEBUG} = 1;
+
+# form input?
+
+if (defined $ENV{CGI_INPUT}) {
+    $ENV{CONTENT_LENGTH} = length $ENV{CGI_INPUT};
+    $ENV{REQUEST_METHOD} = "POST";
+    print "\nWhen ExSite decides to read the form input, the debugger will pause.
+At that time, copy and paste the text between the cut marks into 
+the debugger.
+--------cut-here--------cut-here--------cut-here--------cut-here--------
+$ENV{CGI_INPUT}\&_EOF
+--------cut-here--------cut-here--------cut-here--------cut-here--------
+";
+}
+elsif (defined $ENV{CGI_INPUT_FILE}) {
+    $ENV{CONTENT_LENGTH} = -s $ENV{CGI_INPUT_FILE};
+    $ENV{REQUEST_METHOD} = "POST";
+}
+else {
+    $ENV{REQUEST_METHOD} = "GET";
+}
+
+# run the script
+
+my $opt;
+if ($debug) {
+    $opt = "-d";
+}
+elsif ($profile) {
+    $opt = "-d:DProf";
+}
+print `/usr/bin/perl $opt $scriptname`;
+
+if (! -x $scriptname) {
+    print "[CGI WARNING]: $scriptname is not executable\n";
+}
+
+sub help {
+    print <<EOF
+CGI EXSITE SCRIPT TESTER
+--USAGE--
+
+cgi [-d] [-p] [-e EVAR=value] [-c cookie] 'http://domain.com/cgi/script.cgi/path_info?query_string'
+
+Runs a cgi perl script from the current directory.  
+
+-d   run in Perl debugger
+-p   do profiling
+-e   set an environment variable
+-c   define a cookie
+
+EOF
+}
+
+    

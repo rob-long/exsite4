@@ -1,0 +1,35 @@
+
+These are utility programs that are useful in ExSite site
+administration and software development.
+
+In most cases, your working directory should be your CGI-BIN, to ensure
+these scripts can find the libraries and other files they need.
+
+cdump.pl 
+	dumps sections or pages as an executable perl script.  The script
+	may be re-executed in this or another cgi-bin to import the dumped 
+	data.
+
+cgi
+	emulates the CGI environment; used for executing dynamic URLs 
+	for off-line debugging and profiling
+
+convertv3.pl
+	reads a v3 database and writes to a v4 database
+
+crypt.pl
+	encrypt/decrypt texts that were ciphered with ExSite::Crypt
+
+makepod.csh
+	script to generate POD documentation in HTML format
+
+makesql.pl, makedropsql.pl
+	generates a MySQL script for creating/dropping all tables
+
+printconf.pl
+	prints all of your ExSite core configuration settings
+
+store.pl
+	utility to inspect and reset the persistent data store
+
+

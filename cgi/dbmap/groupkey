@@ -1,0 +1,5 @@
+column	datatype	size	label	display	read	write	search	validate
+groupkey_id	key#	0	Group Key	no	5	9	no	hard
+gid	key:usergroup	0	Group	key	5	8	no	yes
+uid	key:user	0	User	key	5	8	no	yes
+# group role??

@@ -1,0 +1,8 @@
+column	datatype	size	label	display	read	write	validate	default
+content_key_id	key#	0	Key ID	full	5	9	hard
+content_id	key:content	0	Content	brief	5	8	soft
+uid	key:user	0	User	brief	5	8	yes
+gid	key:usergroup	0	Group	brief	5	8	yes
+type	list:key_type	20	Type	brief	5	8	soft	grant
+role	set:role	80	Role	brief	5	8	yes
+ctime	timestamp	0	Created	full	5	9	no	no

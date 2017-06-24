@@ -1,0 +1,4 @@
+column	datatype	size	label	display	read	write	validate
+content_rel_id	key#	0	Content Relation ID	key	5	9	hard
+type	key:content_type	0	Type	brief	5	8	soft
+under	key:content_type	0	Can Nest Under	brief	5	8	soft

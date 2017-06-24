@@ -1,0 +1,19 @@
+column	datatype	size	label	display	read	write	validate
+#
+# revision ID
+#
+revision_id	key#	0	Revision ID	key	5	9	hard
+content_id	key:content	0	Content Node	brief	5	6	soft
+uid	key=user	0	Updated by	full	5	8	yes
+status	enum:revision_status	0	Status	full	5	6	hard
+#
+# revision data
+#
+### mime_type is the original mime-type, actual views may differ
+mime_type	list:mime	80	Mime-Type	brief	5	6	soft
+note	text	255	Comment	full	5	6	no
+#
+# timestamps
+#
+ctime	timestamp	10	Creation Time	full	5	9	no
+ptime	timestamp	10	Publication Time	brief	5	9	no

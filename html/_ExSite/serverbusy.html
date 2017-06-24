@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Server Busy</title>
+    <meta http-equiv="Refresh" content="10">
+    <style>
+* { font-family: sans-serif; }
+#body { width:500px; margin:75px; padding:25px; text-align:left; background-color:#ffc; border:1px dotted red; }
+#counter { font-weight:bold; color:red; }
+    </style>
+  </head>
+  <body>
+    <div align="center">
+    <div id=body>
+
+<h1>Server Busy</h1>
+<p>Due to abnormally high traffic volumes, display of this page has
+been temporarily delayed.  Automatic retry will occur in 
+<span id='counter'>10</span> seconds, or you can select one of these 
+options:</p>
+<ul>
+<li><a href="javascript:window.location.reload()">Retry now</a></li>
+<li><a href="javascript:history.back()">Go Back</a></li>
+</ul>
+
+<script>
+var c = 11;
+countdown();
+function countdown() {
+  c=c-1;
+  var loc = document.getElementById('counter');
+  loc.innerHTML = c;
+  if (c >= 0) { setTimeout("countdown()",1000); }
+}
+</script>
+
+    </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+column	datatype	size	label	display	read	write	search	validate
+attribute_id	key#	0	ID	full	3	4	no	hard
+name	string	80	Attribute	key	1	1	no	soft
+value	text	255	Value	brief	1	1	no	no
+tablename	string	40	Table	brief	1	1	no	soft
+id	int	0	Record	brief	1	1	no	no

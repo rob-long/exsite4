@@ -1,0 +1,8 @@
+column	datatype	size	label	display	read	write	search	validate	default
+content_date_id	key#	0	Date ID	no	9	9	no	hard
+content_id	key:content	0	Content	key	8	8	no	hard
+type	list:date_type	40	Type	brief	5	5	yes	yes
+description	string	255	Description	brief	5	5	yes	yes
+start	datetime:picker	0	Date	brief	5	5	no	soft
+end	datetime:picker	0	End Date	brief	5	5	no	yes
+status	list:date_status	20	Status	brief	5	5	yes	soft	active

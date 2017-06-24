@@ -1,0 +1,22 @@
+/* ExSite default Form styles */
+
+.requiredPrompt { 
+    font-weight:bold; 
+}
+
+/* datePicker */
+
+a.dp-choose-date {
+	width: 16px;
+	height: 16px;
+	padding: 0;
+	margin: 5px 3px 0;
+	display: inline-block;
+	text-indent: -2000px;
+	overflow: hidden;
+	background: url(date.png) no-repeat; 
+}
+a.dp-choose-date.dp-disabled {
+	background-position: 0 -20px;
+	cursor: default;
+}

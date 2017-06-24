@@ -1,0 +1,11 @@
+
+For installation instructions, see doc/install.html or doc/quickinstall.html.
+
+Makefile - see doc/quickinstall.html
+create.sql - MySQL script to create a database
+exsite.sql - MySQL script to create ExSite tables
+[OTHER].sql - MySQL scripts to import sample sites and other data
+
+MySQL scripts and dumps are in 3.23 format, but should work on servers 
+running up to version 5.
+

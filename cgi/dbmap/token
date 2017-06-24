@@ -1,0 +1,8 @@
+column	datatype	size	label	display	read	write	validate
+#token_id	key#	0	ID	full	3	3	hard
+name	key$	255	Key	key	3	3	soft
+value	text	255	Value	full	3	3	soft
+uid	key:member	0	UID	full	3	3	no
+singleuse	list:yn	2	Single Use	full	3	3	yes
+ctime	timestamp	10	Created on	no	3	4	no
+expiry	timestamp	10	Expires on	no	3	4	no

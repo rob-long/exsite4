@@ -1,0 +1,6 @@
+column	datatype	size	label	display	read	write	validate
+# service
+service_id	key#	0	Service ID	no	8	9	hard
+name	string	80	Module	key	7	7	soft
+section_id	key:section	0	Site	brief	7	8	yes
+page_id	key:content	0	Page to run this service	full	7	7	yes

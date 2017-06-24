@@ -1,0 +1,11 @@
+column	datatype	size	label	display	read	write	validate
+searchurl_id	key#	0	Search URL ID	no	8	9	hard
+url	string	255	URL	key	7	8	no
+section_id	key:content	0	Website	full	7	9	hard
+content_id	key:content	0	Content	brief	7	9	yes
+title	string	255	Title	brief	7	7	no
+description	text	200	description	full	7	7	no
+access	int	20	Access	full	7	8	no
+language	string	80	Language	full	7	8	no
+type	string	80	Type	full	7	8	no
+mtime	timestamp	10	Last Indexed	no	8	9	no
