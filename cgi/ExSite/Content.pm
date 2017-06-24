@@ -4297,7 +4297,7 @@ sub new_content_obj {
 	ctime=>undef
 	);
     my $c = new ExSite::Content(data=>\%cnode);
-    $c->insert();
+    $c->{content_id} = $c->insert();
     #my $tree = $this->get_content_tree();
     #$tree->addnode(\%cnode);
     return $c;
