@@ -4309,6 +4309,10 @@ sub new_content {
     return wantarray ? %{$c->get()} : $c->id;
 }
 
+sub new_feature {
+	return undef;
+}
+
 # install - place files in the fileroot
 
 sub install {
