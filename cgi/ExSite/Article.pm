@@ -159,45 +159,68 @@ sub tools {
     my $ml = &get_obj("ML");
     my @tool;
 
+    my %icon;
+    # permalink, tags, comments
+    if ($config{content}{tool_icons} eq "fa") {
+	my $ui = &get_obj("UI");
+	$icon{more} = $ui->faicon("right");
+	$icon{permalink} = $ui->faicon("link");
+	$icon{tags} = $ui->faicon("tag");
+	$icon{comment} = $ui->faicon("comment");
+    }
+    elsif ($config{content}{tool_icons} eq "png") {
+	# PNG img icons
+	$icon{more} = $ml->img(undef,{src=>"$config{server}{HTMLpath}/_ExSite/images/icons/right.png",width=>16,height=>16,class=>"toolIcon"})."&nbsp;";
+	$icon{permalink} = $ml->img(undef,{src=>"$config{server}{HTMLpath}/_ExSite/images/icons/link.png",width=>16,height=>16,class=>"toolIcon"})."&nbsp;";
+	$icon{tags} = $ml->img(undef,{src=>"$config{server}{HTMLpath}/_ExSite/images/icons/tag.png",width=>16,height=>16,class=>"toolIcon"})."&nbsp;";
+	$icon{comment} = $ml->img(undef,{src=>"$config{server}{HTMLpath}/_ExSite/images/icons/comment.png",width=>16,height=>16,class=>"toolIcon"})."&nbsp;";
+    }
+    # else - no icons
+
     # read more/permalink
     my $viewtype = $opt{view} || "normal";
     if ($viewtype eq "all") { $viewtype = "normal"; }
     my $permalink = $this->permalink();
     if (! $this->revision()->has_view($viewtype) && $viewtype eq "small") {
 	# using summary view
-	push @tool, $ml->a($msg{"Read more..."},{href=>$this->get_url(),class=>"ArticleReadMore"});
+	push @tool, $ml->a($msg{"Read more"}.$icon{more},{href=>$this->get_url(),class=>"ArticleReadMore"});
     }
-    elsif ($this->{mode} eq "index") {
-	# use &#8734; as permalink symbol?
-	push @tool, $ml->a($msg{"Permalink"},{href=>$permalink,class=>"ArticlePermalink"});
+    elsif ($this->{mode} eq "index" && $config{content}{article}{permalink}) {
+	push @tool, $ml->a($icon{permalink}.$msg{$config{content}{article}{permalink}},{href=>$permalink,class=>"ArticlePermalink"});
     }
 
     # tags
-    push @tool, "<!--&Tags(content=".$this->id.")-->";
+#    my $taginfo = $this->show_tags();
+#    if ($taginfo) {
+#	push @tool, $icon{tags}.$taginfo;
+#    }
 
     # comments
     if ($this->{mode} eq "index") {
-	my $label = "Comment";
+	my $label = "Comments";
 	my $n_comment = $this->count_contents("comment",{status=>0}); ### FIXME: skips archived comments
 	if ($n_comment) {
-	    $label .= "s ([[n]])";
+	    $label .= " ([[n]])";
 	}
-	push @tool, $ml->a(&substitute($msg{$label},{n=>$n_comment}),{href=>$permalink."#comments"});
+	push @tool, $ml->a($icon{comment}.&substitute($msg{$label},{n=>$n_comment}),{href=>$permalink."#comments"});
     }
     else {
+	# no icon in this case
+	$out .= $ml->a(undef,{name=>"comments"});
 	my $comment = new ExSite::Comment();
 	push @tool, $comment->tools(
-	    mode=>$this->{mode},
+#	    mode=>$this->{mode},
 	    parent=>$this,
-	    comment_type=>"reply",
-	    prompt=>$msg{"Leave a comment"},
+#	    comment_type=>"reply",
+#	    prompt=>$msg{"Leave a comment"},
 	    );
     }
 
-    return $ml->div(
+    $out .= $ml->div(
 	join("",map { $ml->div($_,{class=>"articleTool"}) } @tool),
 	{ class=>"articleTools" }
 	);
+    return $out;
 }
 
 sub show_comments {
@@ -221,16 +244,19 @@ sub show_comments {
 	}
     }
     if ($out) {
+	my $hdg = $opt{heading} || "Comments";
 	return $ml->div(
 	    $ml->a(undef,{name=>"comments"}).
-	    $ml->h2($msg{Comments}).
+	    $ml->h2($msg{$hdg}).
 	    $out,
 	    {class=>"Comments"}
 	    );
     }
     elsif ($opt{no_comments}) {
 	# optional no comments message
-	return $ml->div($msg{$opt{no_comments}},{class=>"noComments"});
+	return $ml->div($ml->a(undef,{name=>"comments"}).
+			$msg{$opt{no_comments}},
+			{class=>"noComments"});
     }
     return undef;
 }
@@ -303,17 +329,17 @@ sub publish_self {
     my $rev = $this->load_revision("newest");
     if ($rev->mime_type !~ /text/) {
 	# our "body" appears to be some non-text type (perhaps an image?)
-	$rev->publish();
+	$rev->publish(%opt);
     }
     # this publishes the article as an HTML file
-    $this->SUPER::publish_self();
+    $this->SUPER::publish_self(%opt);
 }
 
 # publish_content: publish article and all containers up to the section
 # Publishing an article affects the blog index, and there may be previews
 # right up to the home page.
 
-sub publish_content {
+sub publish_content_old {
     my ($this,%opt) = @_;
     # do not publish if we came from an alias
     return undef if ($this->alias);
@@ -381,13 +407,6 @@ sub get_url_dynamic {
     my $this = shift;
     return $this->get_page_url_dynamic();
 }
-
-# editmeta: allow for editing the posting date
-# doesn't work - $config{form}{editable_timestamps} blocks ctime editing
-#sub editmeta_fields {
-#    my $this = shift;
-#    return ["title","label","name","publish","access","hide","language","status","ctime"];
-#}
 
 # workflow options
 # exclude expire as a workflow option on articles
