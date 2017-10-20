@@ -247,7 +247,7 @@ sub get_allowed_sorted {
     my ($this) = @_;
     return sort { 
 	$this->get_map_info($a,"rank") <=> $this->get_map_info($b,"rank") 
-	} $this->get_allowed();
+    } $this->get_allowed();
 }
 
 sub is_allowed {
@@ -504,13 +504,14 @@ sub input {
 	    # hard-coded input name;  the form must know what to do with 
 	    # this input
 	    return $share{DB}->input_exsite(
-					    datatype=>$this->get_datatype($name),
-					    name=>$input_name,
-					    prompt=>$this->label($name),
-					    value=>($value || $this->get($name) || $this->get_map_info($name,"default")),
-					    required=>$this->required($name),
-					    size=>$this->get_map_info($name,"size"),
-					    );
+		datatype=>$this->get_datatype($name),
+		name=>$input_name,
+		prompt=>$this->label($name),
+		value=>($value || $this->get($name) || $this->get_map_info($name,"default")),
+		required=>$this->required($name),
+		size=>$this->get_map_info($name,"size"),
+		tooltip=>$this->get_map_info($name,"help"),
+		);
 	}
 	else {
 	    # auto-coded input name; self-processing ExSite forms can figure
@@ -518,15 +519,16 @@ sub input {
 	    my $rec = $this->recid($name);
 	    my $datatype = $this->get_datatype($name);
 	    return $this->input_column(
-#				       table=>$this->{attr_table},
-#				       column=>"value",
-				       prompt=>$this->label($name),
-				       record=>$rec,
-				       size=>$this->get_map_info($name,"size"),
-				       datatype=>$datatype,
-				       value=>($value || $this->get($name)),
-				       required=>$this->required($name)			       
-				       );
+#		table=>$this->{attr_table},
+#		column=>"value",
+		prompt=>$this->label($name),
+		record=>$rec,
+		size=>$this->get_map_info($name,"size"),
+		datatype=>$datatype,
+		value=>($value || $this->get($name)),
+		 tooltip=>$this->get_map_info($name,"help"),
+		required=>$this->required($name)			       
+		);
 	}
     }
     else {
